@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jeremy Howard">
+<meta name="dcterms.date" content="2022-07-05">
+
+<title>apl-study - Basics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="apl-study - Basics">
+<meta property="og:description" content="This series will explore all the different glyphs in Dyalog APL. Wherever possible examples of a glyph will exist for each glyph that do not use other glyphs.">
+<meta property="og:site-name" content="apl-study">
+<meta name="twitter:title" content="apl-study - Basics">
+<meta name="twitter:description" content="This series will explore all the different glyphs in Dyalog APL. Wherever possible examples of a glyph will exist for each glyph that do not use other glyphs.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">apl-study</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fastai/apl-study/tree/master/"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Basics</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">APL Study Group</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_APL.html" class="sidebar-item-text sidebar-link active">Basics</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_functions.html" class="sidebar-item-text sidebar-link">First functions</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_operators.html" class="sidebar-item-text sidebar-link">Operators and axis</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_competition.html" class="sidebar-item-text sidebar-link">APL Competition 2022</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_the_rest.html" class="sidebar-item-text sidebar-link">The rest of the glyphs</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python.html" class="sidebar-item-text sidebar-link">Python equivalents</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#some-objects" id="toc-some-objects" class="nav-link active" data-scroll-target="#some-objects">Some objects</a>
+  <ul class="collapse">
+  <li><a href="#real" id="toc-real" class="nav-link" data-scroll-target="#real">Real</a></li>
+  <li><a href="#complex" id="toc-complex" class="nav-link" data-scroll-target="#complex">Complex</a></li>
+  <li><a href="#rank-1-arrays" id="toc-rank-1-arrays" class="nav-link" data-scroll-target="#rank-1-arrays">Rank-1 arrays</a></li>
+  <li><a href="#arrays-in-arrays" id="toc-arrays-in-arrays" class="nav-link" data-scroll-target="#arrays-in-arrays">Arrays in arrays</a></li>
+  <li><a href="#comment" id="toc-comment" class="nav-link" data-scroll-target="#comment">⍝ (Comment)</a></li>
+  </ul></li>
+  <li><a href="#basic-math-functions" id="toc-basic-math-functions" class="nav-link" data-scroll-target="#basic-math-functions">Basic math functions</a>
+  <ul class="collapse">
+  <li><a href="#minus-sign-bar" id="toc-minus-sign-bar" class="nav-link" data-scroll-target="#minus-sign-bar"><span><code>-</code></span> (Minus sign; Bar)</a>
+  <ul class="collapse">
+  <li><a href="#monadic---negate" id="toc-monadic---negate" class="nav-link" data-scroll-target="#monadic---negate">Monadic <span><code>-</code></span> (Negate)</a></li>
+  <li><a href="#dyadic---minus-subtract" id="toc-dyadic---minus-subtract" class="nav-link" data-scroll-target="#dyadic---minus-subtract">Dyadic <span><code>-</code></span> (Minus; subtract)</a></li>
+  </ul></li>
+  <li><a href="#plus-sign" id="toc-plus-sign" class="nav-link" data-scroll-target="#plus-sign"><span><code>+</code></span> (Plus sign)</a>
+  <ul class="collapse">
+  <li><a href="#monadic-conjugate" id="toc-monadic-conjugate" class="nav-link" data-scroll-target="#monadic-conjugate">Monadic <span><code>+</code></span> (Conjugate)</a></li>
+  <li><a href="#dyadic-plus" id="toc-dyadic-plus" class="nav-link" data-scroll-target="#dyadic-plus">Dyadic <span><code>+</code></span> (Plus)</a></li>
+  </ul></li>
+  <li><a href="#stilevertical-bar" id="toc-stilevertical-bar" class="nav-link" data-scroll-target="#stilevertical-bar"><span><code>|</code></span> (Stile;Vertical Bar)</a>
+  <ul class="collapse">
+  <li><a href="#monadic-magnitude" id="toc-monadic-magnitude" class="nav-link" data-scroll-target="#monadic-magnitude">Monadic <span><code>|</code></span> (Magnitude)</a></li>
+  <li><a href="#dyadic-residuemodulus" id="toc-dyadic-residuemodulus" class="nav-link" data-scroll-target="#dyadic-residuemodulus">Dyadic <span><code>|</code></span> (Residue;Modulus)</a></li>
+  </ul></li>
+  <li><a href="#divide-sign" id="toc-divide-sign" class="nav-link" data-scroll-target="#divide-sign"><span><code>÷</code></span> (Divide sign)</a>
+  <ul class="collapse">
+  <li><a href="#monadic-reciprocol" id="toc-monadic-reciprocol" class="nav-link" data-scroll-target="#monadic-reciprocol">Monadic <span><code>÷</code></span> (Reciprocol)</a></li>
+  <li><a href="#dyadic-divided-by" id="toc-dyadic-divided-by" class="nav-link" data-scroll-target="#dyadic-divided-by">Dyadic <span><code>÷</code></span> (Divided by)</a></li>
+  </ul></li>
+  <li><a href="#times-sign" id="toc-times-sign" class="nav-link" data-scroll-target="#times-sign"><span><code>×</code></span> (Times sign)</a>
+  <ul class="collapse">
+  <li><a href="#monadic-direction" id="toc-monadic-direction" class="nav-link" data-scroll-target="#monadic-direction">Monadic <span><code>×</code></span> (Direction)</a></li>
+  <li><a href="#dyadic-times" id="toc-dyadic-times" class="nav-link" data-scroll-target="#dyadic-times">Dyadic <span><code>×</code></span> (Times)</a></li>
+  </ul></li>
+  <li><a href="#star" id="toc-star" class="nav-link" data-scroll-target="#star"><span><code>*</code></span> (Star)</a>
+  <ul class="collapse">
+  <li><a href="#monadic-exponential" id="toc-monadic-exponential" class="nav-link" data-scroll-target="#monadic-exponential">Monadic <span><code>*</code></span> (Exponential)</a></li>
+  <li><a href="#dyadic-power" id="toc-dyadic-power" class="nav-link" data-scroll-target="#dyadic-power">Dyadic <span><code>*</code></span> (Power)</a></li>
+  </ul></li>
+  <li><a href="#exclamation-mark" id="toc-exclamation-mark" class="nav-link" data-scroll-target="#exclamation-mark"><span><code>!</code></span> (Exclamation mark)</a>
+  <ul class="collapse">
+  <li><a href="#monadic-factorial" id="toc-monadic-factorial" class="nav-link" data-scroll-target="#monadic-factorial">Monadic <span><code>!</code></span> (factorial)</a></li>
+  <li><a href="#dyadic-binomial" id="toc-dyadic-binomial" class="nav-link" data-scroll-target="#dyadic-binomial">Dyadic <span><code>!</code></span> (Binomial)</a></li>
+  </ul></li>
+  <li><a href="#question-mark" id="toc-question-mark" class="nav-link" data-scroll-target="#question-mark"><span><code>?</code></span> (Question mark)</a>
+  <ul class="collapse">
+  <li><a href="#monadic-roll" id="toc-monadic-roll" class="nav-link" data-scroll-target="#monadic-roll">Monadic <span><code>?</code></span> (Roll)</a></li>
+  <li><a href="#dyadic-deal" id="toc-dyadic-deal" class="nav-link" data-scroll-target="#dyadic-deal">Dyadic <span><code>?</code></span> (Deal)</a></li>
+  </ul></li>
+  <li><a href="#circle" id="toc-circle" class="nav-link" data-scroll-target="#circle"><span><code>○</code></span> (Circle)</a>
+  <ul class="collapse">
+  <li><a href="#monadic-pi-times" id="toc-monadic-pi-times" class="nav-link" data-scroll-target="#monadic-pi-times">Monadic <span><code>○</code></span> (Pi Times)</a></li>
+  <li><a href="#dyadic-circular-function---trig" id="toc-dyadic-circular-function---trig" class="nav-link" data-scroll-target="#dyadic-circular-function---trig">Dyadic <span><code>○</code></span> (Circular Function - Trig)</a></li>
+  </ul></li>
+  <li><a href="#logarithm-circle-star" id="toc-logarithm-circle-star" class="nav-link" data-scroll-target="#logarithm-circle-star"><span><code>⍟</code></span> (Logarithm; Circle Star)</a>
+  <ul class="collapse">
+  <li><a href="#monadic-natural-log" id="toc-monadic-natural-log" class="nav-link" data-scroll-target="#monadic-natural-log">Monadic <span><code>⍟</code></span> (Natural Log)</a></li>
+  <li><a href="#dyadic-log" id="toc-dyadic-log" class="nav-link" data-scroll-target="#dyadic-log">Dyadic <span><code>⍟</code></span> (Log)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#expressions" id="toc-expressions" class="nav-link" data-scroll-target="#expressions">Expressions</a>
+  <ul class="collapse">
+  <li><a href="#precedence" id="toc-precedence" class="nav-link" data-scroll-target="#precedence">Precedence</a></li>
+  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">Functions</a>
+  <ul class="collapse">
+  <li><a href="#statement-separator" id="toc-statement-separator" class="nav-link" data-scroll-target="#statement-separator">⋄ (Statement separator)</a></li>
+  <li><a href="#guard-expressions" id="toc-guard-expressions" class="nav-link" data-scroll-target="#guard-expressions">Guard expressions</a></li>
+  <li><a href="#delnabla-recursion" id="toc-delnabla-recursion" class="nav-link" data-scroll-target="#delnabla-recursion">∇ Del/Nabla (Recursion)</a></li>
+  </ul></li>
+  <li><a href="#destructuring-assignment" id="toc-destructuring-assignment" class="nav-link" data-scroll-target="#destructuring-assignment">Destructuring assignment</a></li>
+  </ul></li>
+  <li><a href="#array-rank" id="toc-array-rank" class="nav-link" data-scroll-target="#array-rank">Array rank</a>
+  <ul class="collapse">
+  <li><a href="#rho" id="toc-rho" class="nav-link" data-scroll-target="#rho"><span><code>⍴</code></span> (rho)</a>
+  <ul class="collapse">
+  <li><a href="#dyadic-reshape" id="toc-dyadic-reshape" class="nav-link" data-scroll-target="#dyadic-reshape">Dyadic <span><code>⍴</code></span> (reshape)</a></li>
+  <li><a href="#monadic-shape-of" id="toc-monadic-shape-of" class="nav-link" data-scroll-target="#monadic-shape-of">Monadic <span><code>⍴</code></span> (shape of)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#strings-characters-and-character-vectors" id="toc-strings-characters-and-character-vectors" class="nav-link" data-scroll-target="#strings-characters-and-character-vectors">Strings (characters and character vectors)</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/fastai/apl-study/tree/master/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Basics</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Dyalog</div>
+    <div class="quarto-category">APL</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jeremy Howard </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 5, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<p>This series will explore all the different glyphs in Dyalog APL. Wherever possible examples of a glyph will exist for each glyph that do not use other glyphs. The purpose of this post is to create documentation for glyphs that are helpful for beginners getting started.</p>
+<p>To get help on a glpyh, such as <a href="https://help.dyalog.com/18.2/#Language/Symbols/Not%20Equal%20To.htm"><code>≠</code></a>, type:</p>
+<pre><code>]Help ≠</code></pre>
+<p>To get more detailed “pictures” of arrays and tacit functions type:</p>
+<div class="cell">
+<pre class="apl cell-code"><code>]box on -style=max -trains=tree -fns=on</code></pre>
+</div>
+<p>This first notebook in the series covers the basic objects.</p>
+<section id="some-objects" class="level2">
+<h2 class="anchored" data-anchor-id="some-objects">Some objects</h2>
+<section id="real" class="level3">
+<h3 class="anchored" data-anchor-id="real">Real</h3>
+<div class="cell">
+<pre class="apl cell-code"><code>1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→─────────────────────────────────────┐
+│Was ON -style=max -trains=tree -fns=on│
+└──────────────────────────────────────┘
+</pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+1
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>¯1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">  
+¯1
+  
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>1.5</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">   
+1.5
+   
+</pre>
+</div>
+</div>
+</section>
+<section id="complex" class="level3">
+<h3 class="anchored" data-anchor-id="complex">Complex</h3>
+<div class="cell">
+<pre class="apl cell-code"><code>0j4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">   
+0J4
+   
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3j4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">   
+3J4
+   
+</pre>
+</div>
+</div>
+<p><code>3j4</code> means <code>3+4i</code>.</p>
+<div class="cell">
+<pre class="apl cell-code"><code>4j0</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+4
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>¯5j¯6</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">     
+¯5J¯6
+     
+</pre>
+</div>
+</div>
+</section>
+<section id="rank-1-arrays" class="level3">
+<h3 class="anchored" data-anchor-id="rank-1-arrays">Rank-1 arrays</h3>
+<div class="cell">
+<pre class="apl cell-code"><code>2 3 1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+│2 3 1│
+└~────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>2 ¯3 1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→─────┐
+│2 ¯3 1│
+└~─────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>0j4 ¯5j¯6</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────────┐
+│0J4 ¯5J¯6│
+└~────────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="arrays-in-arrays" class="level3">
+<h3 class="anchored" data-anchor-id="arrays-in-arrays">Arrays in arrays</h3>
+<div class="cell">
+<pre class="apl cell-code"><code>1 2 3 4 (1 2)</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──────────────┐
+│         ┌→──┐ │
+│ 1 2 3 4 │1 2│ │
+│         └~──┘ │
+└∊──────────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>(1 2)(3 4)</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────────────┐
+│ ┌→──┐ ┌→──┐ │
+│ │1 2│ │3 4│ │
+│ └~──┘ └~──┘ │
+└∊────────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>(1 2)(3 4)5</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──────────────┐
+│ ┌→──┐ ┌→──┐   │
+│ │1 2│ │3 4│ 5 │
+│ └~──┘ └~──┘   │
+└∊──────────────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="comment" class="level3">
+<h3 class="anchored" data-anchor-id="comment">⍝ (Comment)</h3>
+<div class="cell">
+<pre class="apl cell-code"><code>⍝ This is a comment and doesn't do anything
+1 2 3 ⍝ This is a comment after some code</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+│1 2 3│
+└~────┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="basic-math-functions" class="level2">
+<h2 class="anchored" data-anchor-id="basic-math-functions">Basic math functions</h2>
+<section id="minus-sign-bar" class="level3">
+<h3 class="anchored" data-anchor-id="minus-sign-bar"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Minus%20Sign.htm"><code>-</code></a> (Minus sign; Bar)</h3>
+<section id="monadic---negate" class="level4">
+<h4 class="anchored" data-anchor-id="monadic---negate">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Minus%20Sign.htm"><code>-</code></a> (Negate)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>- 4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">  
+¯4
+  
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>- ¯4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+4
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>- 4 2 0 ¯3 ¯5</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──────────┐
+│¯4 ¯2 0 3 5│
+└~──────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>¯4 2 0 ¯3 ¯5</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→───────────┐
+│¯4 2 0 ¯3 ¯5│
+└~───────────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="dyadic---minus-subtract" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic---minus-subtract">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Minus%20Sign.htm"><code>-</code></a> (Minus; subtract)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>3-2</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+1
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3 2 1 - 4 5 1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──────┐
+│¯1 ¯3 0│
+└~──────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3 2 1 - 1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+│2 1 0│
+└~────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>1 - 3 2 1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──────┐
+│¯2 ¯1 0│
+└~──────┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="plus-sign" class="level3">
+<h3 class="anchored" data-anchor-id="plus-sign"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Plus%20Sign.htm"><code>+</code></a> (Plus sign)</h3>
+<section id="monadic-conjugate" class="level4">
+<h4 class="anchored" data-anchor-id="monadic-conjugate">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Plus%20Sign.htm"><code>+</code></a> (Conjugate)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>+ 1.2</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">   
+1.2
+   
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>+ ¯5j¯6</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">    
+¯5J6
+    
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>+ 1.2 0j4 ¯5j¯6</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────────────┐
+│1.2 0J¯4 ¯5J6│
+└~────────────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="dyadic-plus" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic-plus">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Plus%20Sign.htm"><code>+</code></a> (Plus)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>3+2</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+5
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3 2 1 + 4 5 1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+│7 7 2│
+└~────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3 2 1 + 1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+│4 3 2│
+└~────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>1 + 3 2 1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+│4 3 2│
+└~────┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="stilevertical-bar" class="level3">
+<h3 class="anchored" data-anchor-id="stilevertical-bar"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Stile.htm"><code>|</code></a> (Stile;Vertical Bar)</h3>
+<section id="monadic-magnitude" class="level4">
+<h4 class="anchored" data-anchor-id="monadic-magnitude">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Stile.htm"><code>|</code></a> (Magnitude)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>|3 ¯3 3j4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+│3 3 5│
+└~────┘
+</pre>
+</div>
+</div>
+<p><code>3j4</code> means <code>3+4i</code>, which has a magnitude of 5 (because (3×3)+(4×4)=(5×5)).</p>
+</section>
+<section id="dyadic-residuemodulus" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic-residuemodulus">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Stile.htm"><code>|</code></a> (Residue;Modulus)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>2 10 2 | 7 13 8</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+│1 3 0│
+└~────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>2 10 ¯2.5 | 7 ¯13 8</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→─────┐
+│1 7 ¯2│
+└~─────┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="divide-sign" class="level3">
+<h3 class="anchored" data-anchor-id="divide-sign"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Divide%20Sign.htm"><code>÷</code></a> (Divide sign)</h3>
+<section id="monadic-reciprocol" class="level4">
+<h4 class="anchored" data-anchor-id="monadic-reciprocol">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Divide%20Sign.htm"><code>÷</code></a> (Reciprocol)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>÷ 3 ¯2 3j4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→───────────────────────────┐
+│0.3333333333 ¯0.5 0.12J¯0.16│
+└~───────────────────────────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="dyadic-divided-by" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic-divided-by">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Divide%20Sign.htm"><code>÷</code></a> (Divided by)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>3÷2</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">   
+1.5
+   
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3÷2 2.5 ¯1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→─────────┐
+│1.5 1.2 ¯3│
+└~─────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3 2 1÷2 2.5 ¯1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→─────────┐
+│1.5 0.8 ¯1│
+└~─────────┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="times-sign" class="level3">
+<h3 class="anchored" data-anchor-id="times-sign"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Times%20Sign.htm"><code>×</code></a> (Times sign)</h3>
+<section id="monadic-direction" class="level4">
+<h4 class="anchored" data-anchor-id="monadic-direction">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Times%20Sign.htm"><code>×</code></a> (Direction)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>× 3.1 ¯2 0 3j4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→─────────────┐
+│1 ¯1 0 0.6J0.8│
+└~─────────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3j4÷(|3j4)</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">       
+0.6J0.8
+       
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>÷∘|⍨3j4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">       
+0.6J0.8
+       
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>÷∘|⍨</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">   ⍨
+ ┌─┘
+ ∘
+┌┴┐
+÷ |
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>mean 3 4 5 1 7</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>VALUE ERROR: Undefined name: mean
+      mean 3 4 5 1 7
+      ∧</code></pre>
+</div>
+</div>
+<p><code>0.6j0.8</code> represents a vector in the same direction as <code>3j4</code>, but with a magnitude of 5, since it’s <code>3j4÷5</code>.</p>
+</section>
+<section id="dyadic-times" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic-times">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Times%20Sign.htm"><code>×</code></a> (Times)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>3×2</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+6
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3×2 2.5 ¯1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→───────┐
+│6 7.5 ¯3│
+└~───────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3 2 1×2 2.5 ¯1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→─────┐
+│6 5 ¯1│
+└~─────┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="star" class="level3">
+<h3 class="anchored" data-anchor-id="star"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Star.htm"><code>*</code></a> (Star)</h3>
+<section id="monadic-exponential" class="level4">
+<h4 class="anchored" data-anchor-id="monadic-exponential">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Star.htm"><code>*</code></a> (Exponential)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>* 0 1 2</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────────────────────────┐
+│1 2.718281828 7.389056099│
+└~────────────────────────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="dyadic-power" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic-power">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Star.htm"><code>*</code></a> (Power)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>49 5 ¯4 * 0.5 2 0.5</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→───────┐
+│7 25 0J2│
+└~───────┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="exclamation-mark" class="level3">
+<h3 class="anchored" data-anchor-id="exclamation-mark"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Exclamation%20Mark.htm"><code>!</code></a> (Exclamation mark)</h3>
+<section id="monadic-factorial" class="level4">
+<h4 class="anchored" data-anchor-id="monadic-factorial">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Exclamation%20Mark.htm"><code>!</code></a> (factorial)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>!5</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">   
+120
+   
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>!1.5  ⍝ gamma(1.5+1)</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">           
+1.329340388
+           
+</pre>
+</div>
+</div>
+</section>
+<section id="dyadic-binomial" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic-binomial">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Exclamation%20Mark.htm"><code>!</code></a> (Binomial)</h4>
+<p>Binomial can be defined using factorial: <code>X!Y ←→ (!Y)÷(!X)×!Y-X</code>. R is the number of selections of X things from Y things.</p>
+<div class="cell">
+<pre class="apl cell-code"><code>0 1 2 3 4 5 ! 5</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────────────┐
+│1 5 10 10 5 1│
+└~────────────┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="question-mark" class="level3">
+<h3 class="anchored" data-anchor-id="question-mark"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Question%20Mark.htm"><code>?</code></a> (Question mark)</h3>
+<section id="monadic-roll" class="level4">
+<h4 class="anchored" data-anchor-id="monadic-roll">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Question%20Mark.htm"><code>?</code></a> (Roll)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>? 6 6 6 6 6</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────────┐
+│4 3 4 2 1│
+└~────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>? 0 0</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────────────────────────┐
+│0.5456603511 0.3390443517│
+└~────────────────────────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="dyadic-deal" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic-deal">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Question%20Mark.htm"><code>?</code></a> (Deal)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>13 ? 52</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──────────────────────────────────┐
+│51 50 26 10 40 4 34 2 38 8 27 42 44│
+└~──────────────────────────────────┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="circle" class="level3">
+<h3 class="anchored" data-anchor-id="circle"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Circle.htm"><code>○</code></a> (Circle)</h3>
+<section id="monadic-pi-times" class="level4">
+<h4 class="anchored" data-anchor-id="monadic-pi-times">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Circle.htm"><code>○</code></a> (Pi Times)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>○ 0 1 2</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────────────────────────┐
+│0 3.141592654 6.283185307│
+└~────────────────────────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="dyadic-circular-function---trig" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic-circular-function---trig">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Circle.htm"><code>○</code></a> (Circular Function - Trig)</h4>
+<p>For table of stuff <code>ᴏ</code> can do, see the <a href="https://help.dyalog.com/latest/Content/Language/Symbols/Circle.htm">docs</a>. The LHS defines what function is returned. E.g <code>1</code> gives Sine <code>⍵</code>, and and <code>2</code> is Cos.</p>
+<div class="cell">
+<pre class="apl cell-code"><code>0 1 ○ 0</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──┐
+│1 0│
+└~──┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="logarithm-circle-star" class="level3">
+<h3 class="anchored" data-anchor-id="logarithm-circle-star"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Log.htm"><code>⍟</code></a> (Logarithm; Circle Star)</h3>
+<section id="monadic-natural-log" class="level4">
+<h4 class="anchored" data-anchor-id="monadic-natural-log">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Log.htm"><code>⍟</code></a> (Natural Log)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>⍟ 1 2 3 (*1)</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→───────────────────────────┐
+│0 0.6931471806 1.098612289 1│
+└~───────────────────────────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="dyadic-log" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic-log">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Log.htm"><code>⍟</code></a> (Log)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>2 10 ⍟ 32 1000</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──┐
+│5 3│
+└~──┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="expressions" class="level2">
+<h2 class="anchored" data-anchor-id="expressions">Expressions</h2>
+<section id="precedence" class="level3">
+<h3 class="anchored" data-anchor-id="precedence">Precedence</h3>
+<div class="cell">
+<pre class="apl cell-code"><code>3×2+1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+9
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>1 2 3×2+1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+│3 6 9│
+└~────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>1 2 3×2+2 4 6</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──────┐
+│4 12 24│
+└~──────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>3 ¯5 + 4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→───┐
+│7 ¯1│
+└~───┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>8*÷3</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+2
+ 
+</pre>
+</div>
+</div>
+</section>
+<section id="assignment" class="level3">
+<h3 class="anchored" data-anchor-id="assignment">Assignment</h3>
+<div class="cell">
+<pre class="apl cell-code"><code>a←3
+a</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+3
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>⎕←a←3</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+3
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>b←3 4
+b</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──┐
+│3 4│
+└~──┘
+</pre>
+</div>
+</div>
+</section>
+<section id="functions" class="level3">
+<h3 class="anchored" data-anchor-id="functions">Functions</h3>
+<div class="cell">
+<pre class="apl cell-code"><code>{⍵×2} 4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+8
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>f ← {⍵×2}
+f 4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+8
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>g ← {⍵×2+⍺}
+3 g 4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">  
+20
+  
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>f ← {⍵×2}
+h ← {2 + f ⍵}
+h 4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">  
+10
+  
+</pre>
+</div>
+</div>
+<section id="statement-separator" class="level4">
+<h4 class="anchored" data-anchor-id="statement-separator">⋄ (Statement separator)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>f ← {a ← ⍵×2 ⋄ 2 + a}
+f 4</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">  
+10
+  
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>f←{a←1 ⋄ 2 ⋄ 3}  ⍝ First non-assignment is the result of the function
+f 2</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+2
+ 
+</pre>
+</div>
+</div>
+</section>
+<section id="guard-expressions" class="level4">
+<h4 class="anchored" data-anchor-id="guard-expressions">Guard expressions</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>fact←{⍵≤1:1 ⋄ ⍵×fact ⍵-1 }</code></pre>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>fact 1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+1
+ 
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>fact 5</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">   
+120
+   
+</pre>
+</div>
+</div>
+</section>
+<section id="delnabla-recursion" class="level4">
+<h4 class="anchored" data-anchor-id="delnabla-recursion">∇ Del/Nabla (Recursion)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>{⍵≤1:1 ⋄ ⍵×∇ ⍵-1} 5</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">   
+120
+   
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>fact ← {⍵≤1:1 ⋄ ⍵×∇ ⍵-1}</code></pre>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>fact 5</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">   
+120
+   
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="destructuring-assignment" class="level3">
+<h3 class="anchored" data-anchor-id="destructuring-assignment">Destructuring assignment</h3>
+<div class="cell">
+<pre class="apl cell-code"><code>a b ← 3 4
+a</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL"> 
+3
+ 
+</pre>
+</div>
+</div>
+</section>
+</section>
+<section id="array-rank" class="level2">
+<h2 class="anchored" data-anchor-id="array-rank">Array rank</h2>
+<section id="rho" class="level3">
+<h3 class="anchored" data-anchor-id="rho"><a href="https://help.dyalog.com/18.2/#Language/Symbols/Rho.htm"><code>⍴</code></a> (rho)</h3>
+<section id="dyadic-reshape" class="level4">
+<h4 class="anchored" data-anchor-id="dyadic-reshape">Dyadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Rho.htm"><code>⍴</code></a> (reshape)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>⎕ ← 1 2 3 4 5 6</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──────────┐
+│1 2 3 4 5 6│
+└~──────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>a ← 1 2 3 4 5 6
+⎕←mat←2 3 ⍴ a</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+↓1 2 3│
+│4 5 6│
+└~────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>a ← 1 2 3 4 5 6
+3 2 ⍴ a</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──┐
+↓1 2│
+│3 4│
+│5 6│
+└~──┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>a ← 1 2 3 4 5 6
+1 6 ⍴ a</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──────────┐
+↓1 2 3 4 5 6│
+└~──────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>a ← 1 2 3 4 5 6
+⎕←c←2 2 3 ⍴ a</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌┌→────┐
+↓↓1 2 3│
+││4 5 6│
+││     │
+││1 2 3│
+││4 5 6│
+└└~────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>2 3 ⍴ 1</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+↓1 1 1│
+│1 1 1│
+└~────┘
+</pre>
+</div>
+</div>
+</section>
+<section id="monadic-shape-of" class="level4">
+<h4 class="anchored" data-anchor-id="monadic-shape-of">Monadic <a href="https://help.dyalog.com/18.2/#Language/Symbols/Rho.htm"><code>⍴</code></a> (shape of)</h4>
+<div class="cell">
+<pre class="apl cell-code"><code>a ← 1 2 3 4 5 6
+⍴a</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→┐
+│6│
+└~┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>mat←2 3 ⍴ a
+⍴mat</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──┐
+│2 3│
+└~──┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>⍴3</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌⊖┐
+│0│
+└~┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>⍬</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌⊖┐
+│0│
+└~┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>⍴⍬</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→┐
+│0│
+└~┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>mat←2 3 ⍴ a
+⍴⍴mat</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→┐
+│2│
+└~┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>mat←2 3 ⍴ a
+⍴⍴⍴mat</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→┐
+│1│
+└~┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>c←2 2 3 ⍴ a
+⍴c</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────┐
+│2 2 3│
+└~────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>c←2 2 3 ⍴ a
+⍴⍴⍴c</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→┐
+│1│
+└~┘
+</pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="strings-characters-and-character-vectors" class="level2">
+<h2 class="anchored" data-anchor-id="strings-characters-and-character-vectors">Strings (characters and character vectors)</h2>
+<div class="cell">
+<pre class="apl cell-code"><code>'ACF'</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──┐
+│ACF│
+└───┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>'A' 'C' 'F'</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→──┐
+│ACF│
+└───┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>⍴'y'</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌⊖┐
+│0│
+└~┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>⍴'your boat'</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→┐
+│9│
+└~┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>1 2 3 4 'a'</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→────────┐
+│1 2 3 4 a│
+└+────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>1 2 3 4 'ab'</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→─────────────┐
+│         ┌→─┐ │
+│ 1 2 3 4 │ab│ │
+│         └──┘ │
+└∊─────────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>(1 2)(3 4)'ab'</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→─────────────────┐
+│ ┌→──┐ ┌→──┐ ┌→─┐ │
+│ │1 2│ │3 4│ │ab│ │
+│ └~──┘ └~──┘ └──┘ │
+└∊─────────────────┘
+</pre>
+</div>
+</div>
+<div class="cell">
+<pre class="apl cell-code"><code>⎕A</code></pre>
+<div class="cell-output cell-output-display">
+<pre class="language-APL">┌→─────────────────────────┐
+│ABCDEFGHIJKLMNOPQRSTUVWXYZ│
+└──────────────────────────┘
+</pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
